@@ -6,3 +6,10 @@ when
 then
     $a.setValid( false );
 end
+
+rule "Is of valid name"
+when
+    $a : Applicant( name == "JJ" )
+then
+    $a.setValidName( true );
+end

@@ -16,10 +16,11 @@ public class ApplicantTest {
 		KieContainer kContainer = kieServices.getKieClasspathContainer();
 		StatelessKieSession kSession = kContainer.newStatelessKieSession();
 		
-		Applicant applicant = new Applicant("Mr John Smith", 16);
+		Applicant applicant = new Applicant("JJ", 19);
 		assertTrue(applicant.isValid());
 		kSession.execute(applicant);
-		assertFalse(applicant.isValid());
+		assertTrue(applicant.isValid());
+		assertTrue(applicant.isValidName());
 	}
 
 }

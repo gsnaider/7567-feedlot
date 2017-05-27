@@ -5,11 +5,13 @@ public class Applicant {
 	private String name;
 	private int age;
 	private boolean valid;
+	private boolean validName;
 
 	public Applicant(String name, int age) {
 		this.name = name;
 		this.age = age;
 		valid = true;
+		validName = false;
 	}
 
 	public String getName() {
@@ -34,6 +36,14 @@ public class Applicant {
 
 	public void setValid(boolean valid) {
 		this.valid = valid;
+	}
+	
+	public void setValidName(boolean valid) {
+		this.validName = valid;
+	}
+	
+	public boolean isValidName() {
+		return validName;
 	}
 
 }
