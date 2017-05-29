@@ -21,11 +21,11 @@ public class Corral {
 	//private double humedad;
 	private double porcentajePesoEnMS;
 	
-	public Corral(int cabezas, int dia, double pi){//, Weather w) {
+	public Corral(int cabezas, int dia, double pesoInicial){//, Weather w) {
 		this.cabezas = cabezas;
 		this.dia = dia;
-		pesoInicial = pi;
-		pesoActual = pi;
+		this.pesoInicial = pesoInicial;
+		pesoActual = pesoInicial;
 		//clima = w;
 		//racion = 0;
 	}
