@@ -16,6 +16,8 @@ public class printHelper {
                 .getAlimento().getExpellerSoja()*100) + "%)");
         System.out.println("Premezcla Mineral " + round(corral.getKilosPreMezclaMineralHoy()) + " kg - (" +
                 round(corral.getAlimento().getPreMezclaMineral()*100) + "%)");
+        System.out.println("A la materia seca hay que agregarle " + round(corral.getHumedadDeHoy()) + " litros " +
+                "de agua ");
     }
 
     private static double round(double value) {
