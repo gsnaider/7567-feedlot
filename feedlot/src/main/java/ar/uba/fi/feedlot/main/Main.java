@@ -1,9 +1,19 @@
 package ar.uba.fi.feedlot.main;
 
 import ar.uba.fi.feedlot.main.helpers.printHelper;
+import org.drools.core.marshalling.impl.ProtobufMessages;
 import org.kie.api.KieServices;
+import org.kie.api.event.rule.ObjectUpdatedEvent;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.StatelessKieSession;
+import org.kie.api.runtime.rule.FactHandle;
+import org.kie.internal.KnowledgeBase;
+import org.kie.internal.KnowledgeBaseFactory;
+import org.kie.internal.builder.KnowledgeBuilder;
+import org.kie.internal.builder.KnowledgeBuilderFactory;
+import org.kie.internal.io.ResourceFactory;
+import org.kie.internal.runtime.StatefulKnowledgeSession;
 
 //import ar.uba.fi.feedlot.main.Corral.Weather;
 
@@ -11,27 +21,37 @@ import org.kie.api.runtime.StatelessKieSession;
 public class Main {
 
 	public static void main(String[] args) {
-		KieServices kieServices = KieServices.Factory.get();
-		KieContainer kContainer = kieServices.getKieClasspathContainer();
-		StatelessKieSession kSession = kContainer.newStatelessKieSession();
-		
+		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
+		kbuilder.add(ResourceFactory.newClassPathResource("licenseApplication.drl"), ResourceType.DRL);
+		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
+		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
+		StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
+
+
 		Corral c = new Corral(30,1,220);//,Weather.FRIO);
-		kSession.execute(c);
+		FactHandle factHandler = ksession.insert(c);
+		ksession.fireAllRules();
 		printHelper.printFoodRation(c);
 		System.out.println(" ");
-		
+
+
 		c.setDia(10);
-		kSession.execute(c);
+		ksession.update(factHandler ,c);
+		ksession.fireAllRules();
 		printHelper.printFoodRation(c);
 		System.out.println(" ");
 		
 		c.setDia(20);
-		kSession.execute(c);
+		ksession.update(factHandler ,c);
+		ksession.fireAllRules();
 		printHelper.printFoodRation(c);
 		System.out.println(" ");
 		
 		c.setDia(50);
-		kSession.execute(c);
+		ksession.update(factHandler ,c);
+		ksession.fireAllRules();
 		printHelper.printFoodRation(c);
 	}
+
+
 }
