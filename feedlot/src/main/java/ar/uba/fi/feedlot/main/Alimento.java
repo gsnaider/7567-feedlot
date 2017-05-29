@@ -1,4 +1,4 @@
-package ar.uba.fi.feedlot.main.helpers;
+package ar.uba.fi.feedlot.main;
 
 public class Alimento {
     private double siloSorgo;

@@ -1,12 +1,7 @@
 package ar.uba.fi.feedlot.main;
 
 import ar.uba.fi.feedlot.main.helpers.printHelper;
-import org.drools.core.marshalling.impl.ProtobufMessages;
-import org.kie.api.KieServices;
-import org.kie.api.event.rule.ObjectUpdatedEvent;
 import org.kie.api.io.ResourceType;
-import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.StatelessKieSession;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.KnowledgeBase;
 import org.kie.internal.KnowledgeBaseFactory;
@@ -27,8 +22,8 @@ public class Main {
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
 
-
-		Corral c = new Corral(30,1,220);//,Weather.FRIO);
+		Alimento food = new Alimento();
+		Corral c = new Corral(30,1,220, food);//,Weather.FRIO);
 		FactHandle factHandler = ksession.insert(c);
 		ksession.fireAllRules();
 		printHelper.printFoodRation(c);

@@ -13,19 +13,16 @@ public class Corral {
 	//private double racion;
 	private double pesoActual;
 	
-	private double siloSorgo;
-	private double maiz;
-	private double expellerSoja;
-	private double preMezclaMineral;
-	private double materiaSeca;
 	//private double humedad;
 	private double porcentajePesoEnMS;
+	private Alimento food;
 	
-	public Corral(int cabezas, int dia, double pesoInicial){//, Weather w) {
+	public Corral(int cabezas, int dia, double pesoInicial, Alimento food){//, Weather w) {
 		this.cabezas = cabezas;
 		this.dia = dia;
 		this.pesoInicial = pesoInicial;
 		pesoActual = pesoInicial;
+		this.food = food;
 		//clima = w;
 		//racion = 0;
 	}
@@ -37,6 +34,10 @@ public class Corral {
 	/*public Weather getClima() {
 		return clima;
 	}*/
+
+	public Alimento getAlimento() {
+		return this.food;
+	}
 	
 	public void setCabezas(int cabezas) {
 		this.cabezas = cabezas;
@@ -58,22 +59,7 @@ public class Corral {
 		pesoActual = pesoInicial + (this.dia - 25)*1.2;
 	}
 	
-	public double getSiloSorgo() {
-		return siloSorgo;
-	}
-	public double getMaiz() {
-		return maiz;
-	}
-	public double getExpellerSoja() {
-		return expellerSoja;
-	}
-	
-	public double getPreMezclaMineral() {
-		return preMezclaMineral;
-	}
-	public double getMateriaSeca() {
-		return materiaSeca;
-	}
+
 	/*public double getHumedad() {
 		return humedad;
 	}*/
@@ -81,20 +67,7 @@ public class Corral {
 		return porcentajePesoEnMS;
 	}
 	
-	public void setMaiz(double value){
-		maiz = value;
-	}
-	
-	public void setExpellerSoja(double value){
-		expellerSoja = value;
-	}
-	public void setPreMezclaMineral(double value){
-		preMezclaMineral = value;
-	}
-	public void setMateriaSeca(double value){
-		materiaSeca = value;
-	}
-	
+
 	/*public void setHumedad(double value){
 		humedad = value;
 	}*/
@@ -102,9 +75,7 @@ public class Corral {
 	public void setPorcentajePesoEnMS(double value){
 		porcentajePesoEnMS = value;
 	}
-	public void setSiloSorgo(double value){
-		siloSorgo = value;
-	}
+
 	
 		
 	public double getKilosMateriaSecaDeHoy() {
@@ -112,20 +83,20 @@ public class Corral {
 	}
 	
 	public double getHumedadDeHoy() {
-		return (1 - materiaSeca)*(getKilosMateriaSecaDeHoy()/materiaSeca);
+		return (1 - food.getMateriaSeca())*(getKilosMateriaSecaDeHoy()/food.getMateriaSeca());
 	}
 	
 	public double getKilosSiloSorgoHoy() {
-		return siloSorgo*getKilosMateriaSecaDeHoy();
+		return food.getSiloSorgo()*getKilosMateriaSecaDeHoy();
 	}
 	public double getKilosMaizHoy() {
-		return maiz*getKilosMateriaSecaDeHoy();
+		return food.getMaiz()*getKilosMateriaSecaDeHoy();
 	}
 	public double getKilosExpellerSojaHoy() {
-		return expellerSoja*getKilosMateriaSecaDeHoy();
+		return food.getExpellerSoja()*getKilosMateriaSecaDeHoy();
 	}
 	
 	public double getKilosPreMezclaMineralHoy() {
-		return preMezclaMineral*getKilosMateriaSecaDeHoy();
+		return food.getPreMezclaMineral()*getKilosMateriaSecaDeHoy();
 	}
 }
