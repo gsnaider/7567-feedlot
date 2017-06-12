@@ -69,3 +69,18 @@ when
 then
     $a.setPesoActual(); 
 end 
+
+rule "cold factor"
+when
+    $a : Corral( temperatura < 20 )
+then
+    $a.setFactor(1.05); 
+end 
+
+
+rule "heat factor"
+when
+    $a : Corral( temperatura > 28 )
+then
+    $a.setFactor(0.95); 
+end 
