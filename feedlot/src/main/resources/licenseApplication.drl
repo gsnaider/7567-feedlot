@@ -77,10 +77,16 @@ then
     $a.setFactor(1.05); 
 end 
 
-
 rule "heat factor"
 when
     $a : Corral( temperatura > 28 )
 then
     $a.setFactor(0.95); 
+end 
+
+rule "no temperature factor"
+when
+    $a : Corral( temperatura >= 20 &&  <= 28)
+then
+    $a.setFactor(1.00); 
 end 
