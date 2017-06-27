@@ -86,6 +86,7 @@ local.properties
 
 #Idea files
 .idea/
+.idea/*
 *.iml
 
 #Out files
