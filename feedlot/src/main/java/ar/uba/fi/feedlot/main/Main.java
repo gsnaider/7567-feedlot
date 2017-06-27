@@ -1,5 +1,7 @@
 package ar.uba.fi.feedlot.main;
 
+import java.util.ArrayList;
+
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.rule.FactHandle;
 import org.kie.internal.KnowledgeBase;
@@ -9,6 +11,7 @@ import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 import org.kie.internal.runtime.StatefulKnowledgeSession;
 
+import ar.uba.fi.feedlot.main.helpers.CsvToCorral;
 import ar.uba.fi.feedlot.main.helpers.PrintHelper;
 
 public class Main {
@@ -19,44 +22,22 @@ public class Main {
 		KnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
-
-		Corral c = new Corral(30, 1, 220, 29);
-		FactHandle factHandler = ksession.insert(c);
-		ksession.fireAllRules();
-		PrintHelper.printFoodRation(c);
-		System.out.println("factor: " + c.getFactor());
-		System.out.println(" ");
-
-		c.setDia(10);
-		c.setTemperatura(30);
-		ksession.update(factHandler, c);
-		ksession.fireAllRules();
-		PrintHelper.printFoodRation(c);
-		System.out.println("factor: " + c.getFactor());
-		System.out.println(" ");
-
-		c.setDia(20);
-		c.setTemperatura(10);
-		ksession.update(factHandler, c);
-		ksession.fireAllRules();
-		PrintHelper.printFoodRation(c);
-		System.out.println("factor: " + c.getFactor());
-		System.out.println(" ");
-
-		c.setDia(50);
-		ksession.update(factHandler, c);
-		ksession.fireAllRules();
-		PrintHelper.printFoodRation(c);
-		System.out.println("factor: " + c.getFactor());
-		System.out.println(" ");
-
-		c.setDia(30);
-		c.setTemperatura(25);
-		ksession.update(factHandler, c);
-		ksession.fireAllRules();
-		PrintHelper.printFoodRation(c);
-		System.out.println("factor: " + c.getFactor());
-		System.out.println(" ");
+		String path;
+		if (args.length == 0) {
+			   String workingDir = System.getProperty("user.dir");
+			path = workingDir + "\\src\\main\\java\\ar\\uba\\fi\\feedlot\\main\\corrales.csv";
+			
+		} else {
+			path = args[0];
+		}
+		ArrayList<Corral> listCorrales = CsvToCorral.getCorralesFromCsv(path);
+		for (Corral corral : listCorrales) {
+			FactHandle factHandler = ksession.insert(corral);
+			ksession.fireAllRules();
+			PrintHelper.printFoodRation(corral);
+			System.out.println("factor: " + corral.getFactor());
+			System.out.println(" ");
+		}
 	}
 
 }
