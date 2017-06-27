@@ -9,7 +9,7 @@ import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 import org.kie.internal.runtime.StatefulKnowledgeSession;
 
-import ar.uba.fi.feedlot.main.helpers.printHelper;
+import ar.uba.fi.feedlot.main.helpers.PrintHelper;
 
 public class Main {
 
@@ -24,7 +24,7 @@ public class Main {
 		Corral c = new Corral(30, 1, 220, food, 29);
 		FactHandle factHandler = ksession.insert(c);
 		ksession.fireAllRules();
-		printHelper.printFoodRation(c);
+		PrintHelper.printFoodRation(c);
 		System.out.println("factor: " + c.getFactor());
 		System.out.println(" ");
 
@@ -32,7 +32,7 @@ public class Main {
 		c.setTemperatura(30);
 		ksession.update(factHandler, c);
 		ksession.fireAllRules();
-		printHelper.printFoodRation(c);
+		PrintHelper.printFoodRation(c);
 		System.out.println("factor: " + c.getFactor());
 		System.out.println(" ");
 
@@ -40,15 +40,25 @@ public class Main {
 		c.setTemperatura(10);
 		ksession.update(factHandler, c);
 		ksession.fireAllRules();
-		printHelper.printFoodRation(c);
+		PrintHelper.printFoodRation(c);
 		System.out.println("factor: " + c.getFactor());
 		System.out.println(" ");
 
 		c.setDia(50);
 		ksession.update(factHandler, c);
 		ksession.fireAllRules();
-		printHelper.printFoodRation(c);
+		PrintHelper.printFoodRation(c);
 		System.out.println("factor: " + c.getFactor());
+		
+		
+
+		c.setDia(30);
+		c.setTemperatura(25);
+		ksession.update(factHandler, c);
+		ksession.fireAllRules();
+		PrintHelper.printFoodRation(c);
+		System.out.println("factor: " + c.getFactor());
+		System.out.println(" ");
 	}
 
 }
