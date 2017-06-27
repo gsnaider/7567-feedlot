@@ -12,12 +12,12 @@ public class Corral {
 	private double porcentajePesoEnMS;
 	private Alimento food;
 
-	public Corral(int cabezas, int dia, double pesoInicial, Alimento food, int temperatura) {
+	public Corral(int cabezas, int dia, double pesoInicial, int temperatura) {
 		this.cabezas = cabezas;
 		this.dia = dia;
 		this.pesoInicial = pesoInicial;
 		pesoActual = pesoInicial;
-		this.food = food;
+		this.food = new Alimento();
 		this.temperatura = temperatura;
 		factor = 1;
 	}

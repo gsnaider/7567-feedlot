@@ -20,8 +20,7 @@ public class Main {
 		kbase.addKnowledgePackages(kbuilder.getKnowledgePackages());
 		StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
 
-		Alimento food = new Alimento();
-		Corral c = new Corral(30, 1, 220, food, 29);
+		Corral c = new Corral(30, 1, 220, 29);
 		FactHandle factHandler = ksession.insert(c);
 		ksession.fireAllRules();
 		PrintHelper.printFoodRation(c);
@@ -49,8 +48,7 @@ public class Main {
 		ksession.fireAllRules();
 		PrintHelper.printFoodRation(c);
 		System.out.println("factor: " + c.getFactor());
-		
-		
+		System.out.println(" ");
 
 		c.setDia(30);
 		c.setTemperatura(25);
