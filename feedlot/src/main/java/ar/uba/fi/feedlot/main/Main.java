@@ -24,7 +24,7 @@ public class Main {
 		StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();
 		String path;
 		if (args.length == 0) {
-			path = "feedlot\\src\\main\\java\\ar\\uba\\fi\\feedlot\\main\\corrales.csv";
+			path = System.getProperty("user.dir") + System.getProperty("file.separator") +"corrales.csv";
 			
 		} else {
 			path = args[0];
